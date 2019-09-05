@@ -91,7 +91,7 @@ if SERVER then
 		v.Rift = false
 	end
 
-	hook.Add( "PlayerInitialSpawn", "some_unique_name", function(v)
+	hook.Add( "PlayerInitialSpawn", "Limbo_Initial_Spawn", function(v)
 		v:SetLimbo(false)
 		v.LimboPunish = false
 
@@ -102,8 +102,10 @@ if SERVER then
 
 	hook.Add( "PlayerSay", "chatCommand", function( ply, text, public )
 		local check = false
+			
+		text = string.Explode(" ",text)
 
-		if string.lower(text) == "!limbo" and ply:GetLimbo() == true and check == false and ply.LimboPunish==false then
+		if string.lower(text[1]) == "!limbo" and string.lower(text[2]) == nil and ply:GetLimbo() == true and check == false and ply.LimboPunish==false then
 			ply:SetLimbo(false)
 
 			for k,v in pairs(ply.OWeapons) do
@@ -113,7 +115,7 @@ if SERVER then
 			check = true
 		end
 
-		if string.lower(text) == "!limbo" and ply:GetLimbo() == false and check == false and ply.LimboPunish==false then
+		if string.lower(text[1]) == "!limbo" and string.lower(text[2]) == nil and ply:GetLimbo() == false and check == false and ply.LimboPunish==false then
 			ply.OWeapons = {}
 			
 			for k,v in pairs(ply:GetWeapons()) do
